@@ -29,18 +29,14 @@ public class cliente extends HttpServlet {
                 
                 String err = "";               
                 
-                if(request.getParameter("ie") != null){
-                    err = (String)request.getParameter("ie");
-                }
-                
                 if(request.getParameter("e") != null){
                     err = (String)request.getParameter("e");
-                }
-                
-                if(err.equals("cd")){
-                    request.setAttribute("errCad", "Erro ao cadastrar! Verifique se o cliente já está cadastrado!");
-                }else if(err.equals("ie")){
-                    request.setAttribute("errCad", "Ocorreu um erro!");
+                    
+                    if(err.equals("ie")){
+                         request.setAttribute("errCad", "Ocorreu um erro no servidor!");
+                    }else if(err.equals("cd")){
+                          request.setAttribute("errCad", "Erro ao cadastrar! Verifique se o cliente já está cadastrado!");
+                    }
                 }
                 
                 if(connectionOpen){

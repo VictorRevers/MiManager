@@ -21,6 +21,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="http://localhost:8080/MiManager/produtos">Produtos</a>
+                            </li>
                         </ul>              
                     </div>
             </div>
@@ -47,7 +50,7 @@
                     </thead>
                     <tbody>
                         <%
-                            ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+                            ArrayList<Cliente> clientes = new ArrayList();
                             
                             if(request.getAttribute("clientes") != null){
                                 clientes = (ArrayList<Cliente>)request.getAttribute("clientes");
@@ -108,6 +111,8 @@
                 </div>                              
             </div>
         </div>
+                    
+        <script src="./Js/navBtns.js"></script>
         <script>
             <%
                 String errCad = (String)request.getAttribute("errCad");
@@ -117,33 +122,7 @@
                     window.alert("<%=errCad%>");
                 <%}
             %>
-            
-            
-            let reports = document.getElementById("reports");
-            let create = document.getElementById("create");
-            let list = document.getElementById("list");
-            
-            function changeView(param){
-                let view = param;
-                
-                if(view === "reports"){
-                    reports.removeAttribute("hidden");
-                    create.setAttribute("hidden", true);
-                    list.setAttribute("hidden", true);
-                }
-                
-                if(view === "create"){
-                    create.removeAttribute("hidden");
-                    reports.setAttribute("hidden", true);
-                    list.setAttribute("hidden", true);
-                }
-                
-                if(view === "list"){
-                    list.removeAttribute("hidden");
-                    create.setAttribute("hidden", true);
-                    reports.setAttribute("hidden", true);
-                }
-            }
+                                 
         </script>
     </body>
     
