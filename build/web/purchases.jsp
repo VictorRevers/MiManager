@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="classes.Product" %>
+<%@page import="classes.*" %>
 <%@page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
@@ -79,7 +79,7 @@
             <div class="row" id="create" hidden="">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="produtos">
+                        <form method="POST" action="compras">
                             <div class="input-group">
                                 <span class="input-group-text">Data</span>
                                 <input type="date" name="data" aria-label="data" class="form-control"><br>                                      
@@ -90,20 +90,37 @@
                             </div><br>
                             <div class="input-group">
                                 <span class="input-group-text">Cliente</span>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select class="form-select" name="cliente" aria-label="Default select example">
+                                    <option selected></option>
+                                    <%
+                                        if(request.getAttribute("clientes") != null){
+                                            ArrayList<Cliente> clientes = (ArrayList<Cliente>)request.getAttribute("clientes");
+                                            
+                                            for(Cliente cliente : clientes){
+                                                
+                                    %>  
+                                                <option value="<%=cliente.id%>"><%=cliente.tel%></option>
+                                            <%}
+                                        } %>
+                                    
+                                    
+                                    
                                 </select><br>
                             </div><br>
                             <div class="input-group">
                                 <span class="input-group-text">Produto</span>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select class="form-select" name="product" aria-label="Default select example">
+                                    <option selected></option>
+                                    <%
+                                        if(request.getAttribute("products") != null){
+                                            ArrayList<Product> products = (ArrayList<Product>)request.getAttribute("products");
+                                            
+                                            for(Product product : products){
+                                                
+                                    %>  
+                                                <option value="<%=product.id%>"><%=product.name%></option>
+                                            <%}
+                                        } %>
                                 </select><br>
                             </div><br>
                             <div class="d-grid gap-2">
