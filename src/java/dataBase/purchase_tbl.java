@@ -14,7 +14,7 @@ public class purchase_tbl {
     
     public boolean insertPurchase(Purchase purchase){
         try{
-            strSqlCmd = "INSERT INTO purchases (id_cliente, id_product, data, value) VALUES ("+purchase.id_cliente+", "+purchase.id_product+", "+purchase.data+","+purchase.value+")";
+            strSqlCmd = "INSERT INTO purchases (id_cliente, id_product, data, value) VALUES ("+purchase.id_cliente+", "+purchase.id_product+", DATE '"+purchase.data+"',"+purchase.value+")";
             pst = db_connection.prepareStatement(strSqlCmd);
             pst.executeUpdate();
             
@@ -22,6 +22,23 @@ public class purchase_tbl {
         }catch(Exception e){
             System.out.println("Erro: "+e);
             return false;
+        }
+    }
+    
+    public ArrayList getPurchases(){
+        ArrayList<Purchase> purchases = new ArrayList();
+        
+        try{
+            strSqlCmd = "SELECT clientes.name, clientes.tel, purchases.data, SUM(purchases.value) AS value FROM purchases\n" +
+            "INNER JOIN clientes ON purchases.id_cliente = clientes.id\n" +
+            "GROUP BY purchases.data, purchases.id_cliente;";       
+            pst = db_connection.prepareStatement(strSqlCmd);
+            pst.executeQuery();
+                    
+            return purchases;
+        }catch(Exception e){
+            System.out.println("Erro: "+e);
+            return null;
         }
     }
     

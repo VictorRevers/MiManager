@@ -59,12 +59,14 @@ public class purchase extends HttpServlet {
                int id_product = Integer.parseInt(request.getParameter("product"));
                float value = Float.parseFloat(request.getParameter("value"));
                String strData = request.getParameter("data");
-               SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+               
+               //SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                Date data = new Date();
                Exception err = null;
                
                try{
-                    data = format.parse(strData);
+                    //Date dateStrToDt data = new SimpleDateFormat("yyyy-MM-dd").parse(strData);
+                    //data = format.format(dateStrToDt);
                }catch(Exception e){
                    System.out.println("Erro: "+e);
                    db.closeConnection();
@@ -74,7 +76,7 @@ public class purchase extends HttpServlet {
                if(err != null){
                    response.sendRedirect("compras?e=dtp");
                }else{
-                    Purchase purchase = new Purchase(id_cliente, id_product, value, data);
+                    Purchase purchase = new Purchase(id_cliente, id_product, value, strData);
                
                     if(connectionOpen){
                         purchaseTbl.configConnection(db.getConnection());
