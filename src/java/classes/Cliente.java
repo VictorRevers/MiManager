@@ -18,4 +18,9 @@ public class Cliente {
        this.tel = tel;
        this.address = address;
    }
+   
+   public Cliente(String name, String tel){
+       this.name = name;
+       this.tel = tel;
+   }
 }

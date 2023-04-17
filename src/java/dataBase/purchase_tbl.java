@@ -32,8 +32,8 @@ public class purchase_tbl {
         DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy") /*(yyyy-mm-dd)*/;  
         
         try{
-            strSqlCmd = "SELECT clientes.name, clientes.tel, purchases.data, SUM(purchases.value) AS value FROM purchases\n" +
-            "INNER JOIN clientes ON purchases.id_cliente = clientes.id\n" +
+            strSqlCmd = "SELECT clientes.name, clientes.tel, purchases.data, SUM(purchases.value) AS value FROM purchases " +
+            "INNER JOIN clientes ON purchases.id_cliente = clientes.id " +
             "GROUP BY purchases.data, purchases.id_cliente;";       
             pst = db_connection.prepareStatement(strSqlCmd);
             rs = pst.executeQuery();

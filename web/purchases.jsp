@@ -45,27 +45,31 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nome</th>                
+                            <th scope="col">Cliente</th>                
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Data</th>
                             <th scope="col">Valor</th>
-                            <th scope="col">Ação</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         <%
                             //ArrayList<Product> products = new ArrayList();
-                            
-                            if(request.getAttribute("products") != null){
-                                ArrayList<Product> products = (ArrayList<Product>)request.getAttribute("products");
+                            int i = 0;
+                            if(request.getAttribute("purchases") != null){
+                                ArrayList<Purchase> purchases = (ArrayList<Purchase>)request.getAttribute("purchases");
                                 
-                                for(Product product : products){
+                                for(Purchase purchase : purchases){
+                                    i++;
                         %>
+                               
                                 <tr>
-                                        <th scope="row"><%=product.id%></th>
-                                        <td><%=product.name%></td>
-                                        <td><%=product.value%></td>                                       
-                                        <td>                                           
-                                            <button type="button" class="btn btn-sm btn-primary">Editar</button>
-                                        </td>
+                                        <th scope="row"><%=i%></th>
+                                        <td><%=purchase.cliente.name%></td>
+                                        <td><%=purchase.cliente.tel%></td>                                       
+                                        <td><%=purchase.data%></td>
+                                        <td><%=purchase.value%></td>
+                                        
                                     </tr>
                                 <%}
                             }

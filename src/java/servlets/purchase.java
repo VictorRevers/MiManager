@@ -34,13 +34,19 @@ public class purchase extends HttpServlet {
                     
                     clienteTbl.configConnection(connection);
                     productTbl.configConnection(connection);
+                    purchaseTbl.configConnection(connection);
                     //purchaseTbl.configConnection(connection);
                     
                     ArrayList<Cliente> clientes = clienteTbl.getClientes();
                     ArrayList<Product> products = productTbl.getProducts();
+                    ArrayList<Purchase> purchases = purchaseTbl.getPurchases();
                     
                     request.setAttribute("clientes", clientes);
                     request.setAttribute("products", products);
+                    request.setAttribute("purchases", purchases);
+                    
+                    
+                    
                     
                     request.getRequestDispatcher("purchases.jsp").forward(request, response);
                     
