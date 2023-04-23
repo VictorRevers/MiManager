@@ -29,7 +29,7 @@ public class purchase_tbl {
     
     public ArrayList getPurchases(){
         ArrayList<Purchase> purchases = new ArrayList();
-        DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy") /*(yyyy-mm-dd)*/;  
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy") /*(yyyy-mm-dd)*/;  
         
         try{
             strSqlCmd = "SELECT clientes.name, clientes.tel, purchases.data, SUM(purchases.value) AS value FROM purchases " +

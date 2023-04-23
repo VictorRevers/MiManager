@@ -33,8 +33,7 @@
             <div class="row">
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-outline-primary" onClick="changeView('list')">Listar</button>
-                    <button type="button" class="btn btn-outline-primary" onClick="changeView('create')">Cadastrar</button>
-                    <button type="button" class="btn btn-outline-primary" onClick="changeView('reports')">Relatórios</button>
+                    <button type="button" class="btn btn-outline-primary" onClick="changeView('create')">Cadastrar</button>              
                 </div>
             </div><br>
             <div class="row" id="list">

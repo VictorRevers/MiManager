@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="classes.*" %>
 <%@page import="java.util.ArrayList" %>
+<%@page import="java.text.DecimalFormat"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -48,12 +49,12 @@
                             <th scope="col">Cliente</th>                
                             <th scope="col">Telefone</th>
                             <th scope="col">Data</th>
-                            <th scope="col">Valor</th>
+                            <th scope="col">Total</th>
                             
                         </tr>
                     </thead>
                     <tbody>
-                        <%
+                        <%                            
                             //ArrayList<Product> products = new ArrayList();
                             int i = 0;
                             if(request.getAttribute("purchases") != null){

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -28,6 +29,7 @@ public class purchase extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 boolean connectionOpen = db.openConnection();
+                
                 
                 if(connectionOpen){
                     Connection connection = db.getConnection();
@@ -66,26 +68,28 @@ public class purchase extends HttpServlet {
                float value = Float.parseFloat(request.getParameter("value"));
                String strData = request.getParameter("data");
                
-               //SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-               Date data = new Date();
+              
                Exception err = null;
                
-               try{
-                    //Date dateStrToDt data = new SimpleDateFormat("yyyy-MM-dd").parse(strData);
-                    //data = format.format(dateStrToDt);
-               }catch(Exception e){
-                   System.out.println("Erro: "+e);
-                   db.closeConnection();
-                   err = e;                               
-               }
+               
+                    
+               
                
                if(err != null){
                    response.sendRedirect("compras?e=dtp");
                }else{
-                    Purchase purchase = new Purchase(id_cliente, id_product, value, strData);
+                    
                
                     if(connectionOpen){
                         purchaseTbl.configConnection(db.getConnection());
+                       // productTbl.configConnection(db.getConnection());
+                        
+                        //rever essa parte pois da para buscar pelo relacionamento do banco!!!(Redundancia)
+                        //float value = productTbl.getProductValue(id_product);
+                                                             
+                        Purchase purchase = new Purchase(id_cliente, id_product, value, strData);
+                        
+                        
                    
                         boolean insert = purchaseTbl.insertPurchase(purchase);
                    

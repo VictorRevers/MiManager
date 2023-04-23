@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-outline-primary" onClick="changeView('list')">Listar</button>
-                    <button type="button" class="btn btn-outline-primary" onClick="changeView('create')">Cadastrar</button>
+                    <button type="button" class="btn btn-outline-primary" onClick="changeView('create')">Cadastrar</button>              
                     <button type="button" class="btn btn-outline-primary" onClick="changeView('reports')">Relatórios</button>
                 </div>
             </div><br>
@@ -96,11 +96,43 @@
             <div class="row" id="reports" hidden="">              
                 <div class="card">
                     <div class="card-body">
-                        <div class="btn-group" role="group" aria-label="Basic example">                     
-                            <button type="button" class="btn btn-outline-primary">Mais vendido</button>
-                            <button type="button" class="btn btn-outline-primary">Menos vendido</button>
-                            <button type="button" class="btn btn-outline-primary">XXX</button>
-                        </div>
+                        <form method="POST" action="">
+                            <div class="input-group">
+                                <span class="input-group-text">Tipo:</span>
+                                <select class="form-select" name="type" id="type" aria-label="Default select example" onchange="formOpen()">
+                                    <option selected></option>
+                                    <option value="1">Total de vendas por produto</option>
+                                    <option value="2">Total vendido por data</option>
+                                    <option value="3">Total vendido por data especifica</option>
+                                    <!--<option value="4">Total vendido por ano</option>
+                                    <option value="5">Produto especifico</option>-->
+                                </select>                             
+                            </div><br>
+                            <div class="input-group">
+                                <span class="input-group-text" >Data</span>
+                                <input type="date" name="data" id="data" aria-label="data" class="form-control" disabled><br>                                      
+                            </div><br> 
+                            <div class="input-group">
+                                <span class="input-group-text">Produto</span>
+                                <select class="form-select" name="product" id="product" disabled>
+                                    <option selected></option>
+                                     <%
+                            
+                            
+                                    if(request.getAttribute("products") != null){
+                                     ArrayList<Product> products = (ArrayList<Product>)request.getAttribute("products");
+                                
+                                    for(Product product : products){
+                                    %>
+                                    <option value="<%=product.id%>"><%=product.name%></option>
+                                <%}
+                            }
+                            
+                        
+                                %>           
+                                </select>
+                            </div>
+                        </form>
                     </div>
                 </div>                              
             </div>
@@ -117,6 +149,19 @@
                     window.alert("<%=errCad%>");
                 <%}
             %>
+            
+           
+            
+            function formOpen(){
+                let selected_value =  document.getElementById("type").value;
+                let data_inpt = document.getElementById("data");
+                let product_inpt = document.getElementById("product");
+                
+                if (selected_value === "3"){
+                    data_inpt.disabled = false;
+                }
+                //continua...
+            }
             
             
             

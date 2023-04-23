@@ -12,6 +12,22 @@ public class product_tbl {
 
     String strSqlCmd = "";
     
+   /* public float getProductValue(int id){ 
+        try{
+            strSqlCmd = "SELECT value FROM products WHERE id='"+id+"'";
+            pst = db_connection.prepareStatement(strSqlCmd);
+            rs = pst.executeQuery();
+            
+            rs.next();
+            float value =  rs.getFloat("value");
+            
+            return value;
+        }catch(Exception e){
+            System.out.println("Erro: "+e);
+            return 0;
+        }
+    }*/
+    
     public ArrayList getProducts(){
         ArrayList<Product> products = new ArrayList();
         
