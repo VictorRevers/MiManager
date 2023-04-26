@@ -67,4 +67,46 @@ public class product_tbl {
         }
     }
     
+    //RELATÓRIOS:
+    public String[][] totalProductsReport(){
+        try{
+            strSqlCmd = "SELECT products.name, COUNT(purchases.id_product) purchases FROM purchases\n" +
+                        "INNER JOIN products ON purchases.id_product = products.id\n" +
+                        "GROUP BY purchases.id_product";
+            pst = db_connection.prepareStatement(strSqlCmd);
+            rs = pst.executeQuery();
+            int rowCount = 0;
+            int i = 0;
+            int j;
+            
+            if(rs.last()){
+                rowCount = rs.getRow();
+                rs.beforeFirst();
+            }
+                      
+            String[][] reports = new String[rowCount][2];
+            
+            while(rs.next()){
+                j = 0;
+                
+                String name = rs.getString("name");
+                String total = Integer.toString(rs.getInt("purchases"));
+                
+                reports[i][j] = name;
+                j++;
+                reports[i][j] = total;
+                
+                i++;
+            }
+            
+            return reports;
+        }catch(Exception e){
+            System.out.println("Erro"+ e);
+            return null;
+        }
+        
+        
+    }
+    
+    
 }
