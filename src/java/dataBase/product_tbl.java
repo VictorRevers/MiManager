@@ -7,6 +7,7 @@ public class product_tbl {
     private Connection db_connection;
     private PreparedStatement pst;
     private ResultSet rs;
+    private Utilitarys utilitarys = new Utilitarys();
     
     public void configConnection(Connection db_connection) {this.db_connection = db_connection;}
 
@@ -70,20 +71,24 @@ public class product_tbl {
     //RELATÓRIOS:
     public String[][] totalProductsReport(){
         try{
-            strSqlCmd = "SELECT products.name, COUNT(purchases.id_product) purchases FROM purchases\n" +
+            utilitarys.configConnection(db_connection);
+            strSqlCmd = "SELECT products.name, COUNT(purchases.id_product) AS purchases FROM purchases\n" +
                         "INNER JOIN products ON purchases.id_product = products.id\n" +
                         "GROUP BY purchases.id_product";
+            
+            int rowCount = utilitarys.getQueryRowCount(strSqlCmd);
+            
             pst = db_connection.prepareStatement(strSqlCmd);
             rs = pst.executeQuery();
-            int rowCount = 0;
+            
             int i = 0;
             int j;
             
-            if(rs.last()){
+            /*if(rs.last()){
                 rowCount = rs.getRow();
                 rs.beforeFirst();
-            }
-                      
+            }*/          
+                    
             String[][] reports = new String[rowCount][2];
             
             while(rs.next()){
@@ -101,7 +106,7 @@ public class product_tbl {
             
             return reports;
         }catch(Exception e){
-            System.out.println("Erro"+ e);
+            System.out.println("Erro: "+ e);
             return null;
         }
         

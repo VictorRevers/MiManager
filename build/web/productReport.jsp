@@ -13,21 +13,38 @@
                     <thead>
                         <tr>
                             <th scope="col"></th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Total</th>                              
+                            <%
+                                if(request.getAttribute("columns") != null){
+                                    String[] columns = (String[])request.getAttribute("columns");
+                            
+                                    for(int i = 0; i<columns.length;i++){
+                                
+                            %>
+                            <th scope="col"><%=columns[i]%></th>
+                                    <%}
+                                }%>
                         </tr>
                     </thead>
                     <tbody>
-                        
-                                <tr>
-                                        <th scope="row"></th>
-                                        <td>Empadao</td>
-                                                                           
-                                        <td>                                           
-                                           1
-                                        </td>
-                                    </tr>
+                        <%
+                            if(request.getAttribute("reports") != null){
+                                String[][] reports = (String[][])request.getAttribute("reports");
+                                int i = 0;
+                                int j;
                                 
+                                while(i<reports.length){
+                                    j = 0;
+                                
+                        %>
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <td><%=reports[i][j]%></td>
+                                        <%j++;%>
+                                        <td><%=reports[i][j]%></td>                                                                                                                         
+                                    </tr>
+                                    
+                                <%i++;}
+                            }%>  
                             
                             
                         

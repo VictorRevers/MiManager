@@ -96,7 +96,7 @@
             <div class="row" id="reports" hidden="">              
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="POST" action="relatorioProdutos">
                             <div class="input-group">
                                 <span class="input-group-text">Tipo:</span>
                                 <select class="form-select" name="type" id="type" aria-label="Default select example" onchange="formOpen()">
@@ -131,6 +131,9 @@
                         
                                 %>           
                                 </select>
+                            </div><br>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="Submit">Gerar</button>
                             </div>
                         </form>
                     </div>
