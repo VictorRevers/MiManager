@@ -28,6 +28,7 @@
                     <tbody>
                         <%
                             if(request.getAttribute("reports") != null){
+                                String type = (String)request.getAttribute("type");
                                 String[][] reports = (String[][])request.getAttribute("reports");
                                 int i = 0;
                                 int j;
@@ -36,13 +37,26 @@
                                     j = 0;
                                 
                         %>
+                        <%                         
+                            if(type == "1"){%>
                                     <tr>
                                         <th scope="row"></th>
                                         <td><%=reports[i][j]%></td>
                                         <%j++;%>
                                         <td><%=reports[i][j]%></td>                                                                                                                         
                                     </tr>
-                                    
+                            <%}%>
+                            <%                         
+                            if(type == "2"){%>
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <td><%=reports[i][j]%></td>
+                                        <%j++;%>
+                                        <td><%=reports[i][j]%></td>
+                                        <%j++;%>
+                                        <td><%=reports[i][j]%></td>
+                                    </tr>
+                            <%}%>   
                                 <%i++;}
                             }%>  
                             

@@ -2,6 +2,8 @@ package dataBase;
 import classes.Product;
 import java.sql.*;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat; 
 
 public class product_tbl {
     private Connection db_connection;
@@ -106,11 +108,56 @@ public class product_tbl {
             
             return reports;
         }catch(Exception e){
-            System.out.println("Erro: "+ e);
+            System.out.println("Erro: "+e);
             return null;
         }
         
         
+    }
+    
+    public String[][] totalPDataReport(){
+        try{
+            utilitarys.configConnection(db_connection);
+            strSqlCmd = "SELECT products.name, purchases.data, COUNT(purchases.id_product) AS purchases FROM purchases\n" +
+                        "INNER JOIN products ON purchases.id_product = products.id\n" +
+                        "GROUP BY purchases.data, purchases.id_product\n" +
+                        "ORDER BY data desc"; 
+            
+            int rowCount = utilitarys.getQueryRowCount(strSqlCmd);
+            
+            
+            pst = db_connection.prepareStatement(strSqlCmd);
+            rs = pst.executeQuery();
+            
+            int i = 0;
+            int j;
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            
+            String[][] reports = new String[rowCount][3];
+            
+            while(rs.next()){
+                j = 0;
+                
+                String name = rs.getString("name");
+                String total = Integer.toString(rs.getInt("purchases"));
+                
+                String data = dateFormat.format(rs.getDate("data"));
+                
+                reports[i][j] = name;
+                j++;
+                reports[i][j] = data;
+                j++;
+                reports[i][j] = total;
+                
+                i++;
+            }
+            
+            return reports;
+                     
+        }catch(Exception e){
+            System.out.println("Erro: "+e);
+            return null;
+        }
     }
     
     

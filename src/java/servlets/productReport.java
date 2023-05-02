@@ -32,10 +32,23 @@ public class productReport extends HttpServlet {
                         
                         request.setAttribute("reports", reports);
                         request.setAttribute("columns", columns);
+                        request.setAttribute("type", "1");
                         
                         request.getRequestDispatcher("productReport.jsp").forward(request, response);
                         
                         db.closeConnection();                                             
+                    }
+                    if(option == 2){
+                        productTbl.configConnection(db.getConnection());
+                        
+                        String[][] reports = productTbl.totalPDataReport();
+                        String[] columns = {"Produto", "Data", "Total de vendas"};
+                        
+                        request.setAttribute("reports", reports);
+                        request.setAttribute("columns", columns);
+                        request.setAttribute("type", "2");
+                        
+                        request.getRequestDispatcher("productReport.jsp").forward(request, response);
                     }
                 }else{
                     db.closeConnection();
