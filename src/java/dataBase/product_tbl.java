@@ -15,21 +15,35 @@ public class product_tbl {
 
     String strSqlCmd = "";
     
-   /* public float getProductValue(int id){ 
+   public Product getProductById(int id){ 
         try{
-            strSqlCmd = "SELECT value FROM products WHERE id='"+id+"'";
+            String name = null;
+            float value = 0;
+            strSqlCmd = "SELECT * FROM products WHERE id='"+id+"'";
             pst = db_connection.prepareStatement(strSqlCmd);
             rs = pst.executeQuery();
             
-            rs.next();
-            float value =  rs.getFloat("value");
+            /*if(!rs.next()){
+                return null;
+            }*/
             
-            return value;
+            while(rs.next()){
+                name = rs.getString("name");
+                value =  rs.getFloat("value");             
+            }
+            
+            if(name != null){
+                 Product product = new Product(id,name,value);
+                 return product;
+            }else{
+                return null;
+            }
+            
         }catch(Exception e){
             System.out.println("Erro: "+e);
-            return 0;
+            return null;
         }
-    }*/
+    }
     
     public ArrayList getProducts(){
         ArrayList<Product> products = new ArrayList();

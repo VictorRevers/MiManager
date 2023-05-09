@@ -24,6 +24,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="http://localhost:8080/MiManager/produtos">Produtos</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="http://localhost:8080/MiManager/compras">Compras</a>
+                            </li>
                         </ul>              
                     </div>
             </div>

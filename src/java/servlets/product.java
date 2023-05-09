@@ -53,7 +53,10 @@ public class product extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                //INSERIR PRODUTO
+                if(request.getParameter("edit") != null){                                    
+                    response.sendRedirect("editar_produto?id="+request.getParameter("id"));
+                }else{
+                    //INSERIR PRODUTO
                 String name = request.getParameter("name");
                 float value = Float.parseFloat(request.getParameter("value"));
                 
@@ -76,7 +79,10 @@ public class product extends HttpServlet {
                 }else{
                     db.closeConnection();
                     response.sendRedirect("produtos?e=ie");
-                }               
+                }
+                }
+                
+                               
     }    
 
 }

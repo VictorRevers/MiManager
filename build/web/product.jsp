@@ -24,6 +24,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="http://localhost:8080/MiManager/cliente">Clientes</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="http://localhost:8080/MiManager/compras">Compras</a>
+                            </li>
                         </ul>              
                     </div>
             </div>
@@ -60,8 +63,13 @@
                                         <th scope="row"><%=product.id%></th>
                                         <td><%=product.name%></td>
                                         <td><%=product.value%></td>                                       
-                                        <td>                                           
-                                            <button type="button" class="btn btn-sm btn-primary">Editar</button>
+                                        <td>
+                                            <form method="POST" action="produtos">
+                                                <input type="text" name="id" value="<%=product.id%>" hidden="true"/>
+                                                <input type="text" name="edit" value="true" hidden="true"/>
+                                                <button type="submit" class="btn btn-sm btn-primary">Editar</button>
+                                            </form>
+                                            
                                         </td>
                                     </tr>
                                 <%}
