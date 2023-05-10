@@ -29,8 +29,9 @@
             <div class="row" id="create" >
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="editar_produtos">
+                        <form method="POST" action="editar_produto">
                             <% Product product = (Product)request.getAttribute("product"); %>
+                            <input type="text" value="<%=product.id%>" name="id" hidden >
                             <div class="input-group">
                                 <span class="input-group-text">Nome</span>
                                 <input type="text" name="name" aria-label="name" value="<%=product.name%>" class="form-control"><br>                                      

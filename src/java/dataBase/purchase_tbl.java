@@ -26,6 +26,7 @@ public class purchase_tbl {
             return false;
         }
     }
+   
     
     public ArrayList getPurchases(){
         ArrayList<Purchase> purchases = new ArrayList();

@@ -46,6 +46,25 @@ public class editProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                 boolean connectionOpen = db.openConnection();
+                 
+                 int id = Integer.parseInt(request.getParameter("id"));
+                 String name = request.getParameter("name");
+                 float value = Float.parseFloat(request.getParameter("value"));
+                 
+                 Product product = new Product(id, name, value);
+                 
+                 if(connectionOpen){
+                     productTbl.configConnection(db.getConnection());
+                     
+                     boolean update = productTbl.updateProduct(product);
+                     
+                     if(update){
+                         response.sendRedirect("produtos");
+                     }else{
+                         response.sendRedirect("produtos?e=ie");
+                     }
+                 }
         
     }
 

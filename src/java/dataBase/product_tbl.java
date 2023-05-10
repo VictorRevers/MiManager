@@ -44,6 +44,19 @@ public class product_tbl {
             return null;
         }
     }
+   
+   public boolean updateProduct(Product product){
+       try{
+           strSqlCmd = "UPDATE products SET name='"+product.name+"', value='"+product.value+"' WHERE id='"+product.id+"'";
+           pst = db_connection.prepareStatement(strSqlCmd);
+           pst.executeUpdate();
+           
+           return true;
+       }catch(Exception e){
+           System.out.println("Erro: "+e);
+           return false;
+       }
+   }
     
     public ArrayList getProducts(){
         ArrayList<Product> products = new ArrayList();
