@@ -19,6 +19,9 @@ public class productReport extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                //setando a codificação dos caracteres para poder receber palavras com caracteres especiais.
+                request.setCharacterEncoding("UTF-8");
+                
                 int option = Integer.parseInt(request.getParameter("type"));
                 
                 boolean connectionOpen = db.openConnection();
@@ -61,6 +64,9 @@ public class productReport extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+               //setando a codificação dos caracteres para poder receber palavras com caracteres especiais.
+                request.setCharacterEncoding("UTF-8");
+                
                int option = Integer.parseInt(request.getParameter("type"));
                
                response.sendRedirect("relatorioProdutos?type="+option);

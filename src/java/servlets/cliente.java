@@ -23,6 +23,9 @@ public class cliente extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                //setando a codificação dos caracteres para poder receber palavras com caracteres especiais.
+                request.setCharacterEncoding("UTF-8");
+                
                 boolean connectionOpen = db.openConnection();
                 
                 
@@ -57,7 +60,9 @@ public class cliente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+                //setando a codificação dos caracteres para poder receber palavras com caracteres especiais.
+                request.setCharacterEncoding("UTF-8");
+                
                 //INSERIR CLIENTE
                 String name = (String)request.getParameter("name");
                 String tel = (String)request.getParameter("tel");
