@@ -63,37 +63,43 @@ public class cliente extends HttpServlet {
                 //setando a codificação dos caracteres para poder receber palavras com caracteres especiais.
                 request.setCharacterEncoding("UTF-8");
                 
-                //INSERIR CLIENTE
-                String name = (String)request.getParameter("name");
-                String tel = (String)request.getParameter("tel");
-                String address = (String)request.getParameter("address");
+                if(request.getParameter("edit") != null){                                    
+                    response.sendRedirect("editar_cliente?id="+request.getParameter("id"));
+                }else{
+                    //INSERIR CLIENTE
+                    String name = (String)request.getParameter("name");
+                    String tel = (String)request.getParameter("tel");
+                    String address = (String)request.getParameter("address");
                 
-                Cliente cliente = new Cliente(name, tel, address);
+                    Cliente cliente = new Cliente(name, tel, address);
                 
-               boolean connectionOpen =  db.openConnection();
+                    boolean connectionOpen =  db.openConnection();
                
-               if(connectionOpen){
-                   clienteTbl.configConnection(db.getConnection());
+                    if(connectionOpen){
+                        clienteTbl.configConnection(db.getConnection());
                    
-                   int checkTel = clienteTbl.checkTel(tel);
+                        int checkTel = clienteTbl.checkTel(tel);
                    
-                   if(checkTel == 0){
-                       boolean insert = clienteTbl.insertCliente(cliente);
+                        if(checkTel == 0){
+                            boolean insert = clienteTbl.insertCliente(cliente);
                    
-                        if(insert){
-                            db.closeConnection();
-                            response.sendRedirect("cliente");
-                        }else{
-                            db.closeConnection();
-                            response.sendRedirect("cliente?e=cd");                      
-                        }
-                   }else if(checkTel == 1){
+                            if(insert){
+                                db.closeConnection();
+                                response.sendRedirect("cliente");
+                            }else{
+                                db.closeConnection();
+                                response.sendRedirect("cliente?e=cd");                      
+                            }
+                        }else if(checkTel == 1){
                             db.closeConnection();
                             response.sendRedirect("cliente?e=cd");
-                   }else{
+                        }else{
                             db.closeConnection();
                             response.sendRedirect("cliente?e=ie");
-                   }
-               }                                         
+                        }
+                    }  
+                }
+                
+                                                       
     }
 } 

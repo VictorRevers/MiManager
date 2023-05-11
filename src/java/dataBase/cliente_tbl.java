@@ -13,6 +13,37 @@ public class cliente_tbl {
     
     String strSQLCmd = "";
     
+    public Cliente getClienteById(int id){
+        try{
+            strSQLCmd = "SELECT * FROM clientes WHERE id='"+id+"'";
+            pst = db_connection.prepareStatement(strSQLCmd);
+            rs = pst.executeQuery();
+            
+            
+            String name = null;
+            String tel = null;
+            String address = null;
+            
+            while(rs.next()){
+                name = rs.getString("name");
+                tel =  rs.getString("tel");
+                address = rs.getString("address");
+            }
+            
+            if(name != null){
+                Cliente cliente = new Cliente(id, name, tel, address);
+                return cliente;
+            }else{
+                return null;
+            }
+                                 
+        }catch(Exception e){
+            System.out.println("Erro: "+e);
+            return null;
+        }
+        
+    }
+    
     public int checkTel(String tel){
         try{
             strSQLCmd = "SELECT tel FROM clientes WHERE tel="+tel+"";

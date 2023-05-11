@@ -65,7 +65,11 @@
                                         <td><%=cliente.tel%></td>
                                         <td><%=cliente.address%></td>
                                         <td>                                           
-                                            <button type="button" class="btn btn-sm btn-primary">Editar</button>
+                                            <form method="POST" action="cliente">
+                                                <input type="text" name="id" value="<%=cliente.id%>" hidden="true"/>
+                                                <input type="text" name="edit" value="true" hidden="true"/>
+                                                <button type="submit" class="btn btn-sm btn-primary">Editar</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 <%}

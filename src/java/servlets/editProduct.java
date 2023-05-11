@@ -38,6 +38,7 @@ public class editProduct extends HttpServlet {
                         request.getRequestDispatcher("editProduct.jsp").forward(request, response); 
                         db.closeConnection();
                     }else{
+                        db.closeConnection();
                         response.sendRedirect("produtos");
                     }
                 }
@@ -49,8 +50,8 @@ public class editProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                //setando a codificação dos caracteres para poder receber palavras com caracteres especiais.
-                request.setCharacterEncoding("UTF-8");
+                 //setando a codificação dos caracteres para poder receber palavras com caracteres especiais.
+                 request.setCharacterEncoding("UTF-8");
                  boolean connectionOpen = db.openConnection();
                  
                  int id = Integer.parseInt(request.getParameter("id"));
