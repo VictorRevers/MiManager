@@ -51,6 +51,35 @@ public class editCliente extends HttpServlet {
             throws ServletException, IOException {
                 //setando a codificação dos caracteres para poder receber palavras com caracteres especiais.
                 request.setCharacterEncoding("UTF-8");
+                boolean connectionOpen = db.openConnection();
+                
+                
+                if(connectionOpen){
+                    String name = (String)request.getParameter("name");
+                    String tel = (String)request.getParameter("tel");
+                    String address = (String)request.getParameter("add");
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    
+                    Cliente cliente = new Cliente(id, name, tel, address);
+                    
+                    clienteTbl.configConnection(db.getConnection());
+                    
+                   boolean update =  clienteTbl.updateCliente(cliente);
+                   
+                   if(update){
+                       db.closeConnection();
+                       response.sendRedirect("cliente");
+                   }else{
+                       db.closeConnection();
+                       response.sendRedirect("cliente?e=ie");
+                   }
+                }else{
+                    db.closeConnection();
+                    response.sendRedirect("cliente?e=ie");
+                }
+                
+                
+                
                 
                 
        

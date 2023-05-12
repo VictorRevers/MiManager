@@ -66,10 +66,15 @@ public class editProduct extends HttpServlet {
                      boolean update = productTbl.updateProduct(product);
                      
                      if(update){
+                         db.closeConnection();
                          response.sendRedirect("produtos");
                      }else{
+                         db.closeConnection();
                          response.sendRedirect("produtos?e=ie");
                      }
+                 }else{
+                     db.closeConnection();
+                     response.sendRedirect("produtos?e=ie");
                  }
         
     }

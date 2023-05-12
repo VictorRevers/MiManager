@@ -103,4 +103,17 @@ public class cliente_tbl {
         
     }
     
+    public boolean updateCliente(Cliente cliente){
+        try{
+            strSQLCmd = "UPDATE clientes SET name='"+cliente.name+"', tel='"+cliente.tel+"',address='"+cliente.address+"' WHERE id='"+cliente.id+"'";
+            pst = db_connection.prepareStatement(strSQLCmd);
+            pst.executeUpdate();
+            
+            return true;
+        }catch(Exception e){
+            System.out.println("Erro: "+e);
+            return false;
+        }
+    }
+    
 }
